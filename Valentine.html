@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #ffeef2;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* Container for the whole app */
+        .app-container {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        /* Page 1 Styles */
+        #page1 h1 {
+            color: #d63384;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn-yes {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+        }
+
+        .btn-no {
+            background-color: white;
+            color: #999;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Page 2 Styles (Hidden by default) */
+        #page2 {
+            display: none;
+        }
+
+        .cat-gif {
+            width: 200px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            background: white;
+            padding: 10px;
+        }
+
+        .success-text {
+            color: #d63384;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .secret-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            font-style: italic;
+            color: #666;
+            line-height: 1.6;
+            border-left: 5px solid #ff4b2b;
+        }
+
+        /* Floating Emojis */
+        .emoji {
+            position: absolute;
+            font-size: 24px;
+            user-select: none;
+            pointer-events: none;
+            animation: floatUp 5s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="emoji-bg"></div>
+
+    <div class="app-container">
+        <div id="page1">
+            <h1>My honeypie, Do<br>u wanna be my<br>valentine??</h1>
+            <div class="btn-group">
+                <button class="btn-yes" onclick="showNextPage()">YYYaaayyy! ❤️</button>
+                <button class="btn-no" id="noButton">No</button>
+            </div>
+        </div>
+
+        <div id="page2">
+            <img src="c:\Users\Asus\Desktop\Sami\175110591270747940.gif" class="cat-gif" alt="Cute Cats">
+            <div class="success-text">Mwah ❤️ ......I love u baby 😭</div>
+            
+            <div class="secret-card">
+                <small style="color:#ff416c; display:block; margin-bottom:10px;">SECRET MESSAGE</small>
+                "Im glad i got u in my life, i want u in my life forever .....i wanna make u my wife and have the most lovey dovey family with u hehe......wut do u think of the plan??? I need u to mek it successful. 🥰"
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Make the "No" button move
+        const noBtn = document.getElementById('noButton');
+        noBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        });
+
+        // Transition to Page 2
+        function showNextPage() {
+            document.getElementById('page1').style.display = 'none';
+            document.getElementById('page2').style.display = 'block';
+        }
+
+        // Generate floating background emojis
+        const emojis = ['❤️', '💖', '✨', '🌸', '🐱', '🦋'];
+        function createEmoji() {
+            const e = document.createElement('div');
+            e.className = 'emoji';
+            e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            e.style.left = Math.random() * 100 + 'vw';
+            e.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.getElementById('emoji-bg').appendChild(e);
+            
+            setTimeout(() => { e.remove(); }, 6000);
+        }
+        setInterval(createEmoji, 500);
+    </script>
+</body>
+</html>
